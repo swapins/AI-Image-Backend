@@ -182,13 +182,60 @@ php artisan queue:work
 This will handle the background processing of image variations using the OpenAI API.
 
 ## API Documentation
-The following API endpoints are available for interacting with the Laravel backend:
 
-- **POST /api/upload-image**: Upload a PNG or JPG image.
-- **GET /api/images**: Get a list of uploaded and generated images.
-- **GET /api/images/{id}/download**: Download a generated image by ID.
+### Route Breakdown:
 
-Ensure proper authentication is implemented for all routes, supports Sanctum, API key, And No Auth for Demo.
+1. **POST `/upload-image`**:
+   - **Purpose**: Allows an authenticated user to upload an image (PNG or JPG) to the server.
+   - **Controller Method**: `ImageController@upload`
+   - **Middleware**: `auth:sanctum` ensures that the route is protected and only accessible by users who have been authenticated via the Sanctum token-based authentication.
+   - **Expected Input**: The image file should be included in the request, typically in a multipart form-data format.
+   - **Response**: Upon successful upload, the server will likely return the image URL or some identifier to track the image for later operations (such as generating variations).
+
+2. **GET `/generate-variations/{imageId}`**:
+   - **Purpose**: Triggers the generation of AI-based variations for the image identified by `imageId`. This route does not require authentication, meaning it could be used in contexts where image generation happens in the background or by an external service.
+   - **Controller Method**: `ImageController@generateImageVariations`
+   - **Parameters**:
+     - `imageId`: The ID of the image for which variations will be generated.
+   - **Expected Behavior**: The server will use the OpenAI API or similar to generate variations of the provided image and save them. Depending on the implementation, it may return a success message or provide a link to the generated images.
+   - **Response**: Could return the status of the generation process or URLs to the generated image variations.
+
+3. **GET `/user-images`**:
+   - **Purpose**: Retrieves a list of images uploaded by the authenticated user.
+   - **Controller Method**: `ImageController@getUserImages`
+   - **Middleware**: This route could use `auth:sanctum` if you want to restrict access to only authenticated users’ images.
+   - **Expected Output**: A list of images associated with the authenticated user, including metadata like image URLs, upload dates, and possibly links to generated variations.
+   - **Response**: A JSON response containing the list of the user's images.
+
+---
+
+### Example API Workflow:
+1. **User Uploads Image**: 
+   - POST `/upload-image`
+   - Uploads the image via the frontend. The server stores the image and returns a response.
+
+2. **Generate Image Variations**: 
+   - GET `/generate-variations/{imageId}`
+   - Once the image is uploaded, the user can request image variations to be generated via this route.
+
+3. **View User's Uploaded Images**: 
+   - GET `/user-images`
+   - The authenticated user can retrieve and view the list of images they've uploaded, including generated variations.
+
+---
+
+### Suggested Improvements:
+
+- **Authentication for Image Generation**: 
+   - Currently, `/generate-variations/{imageId}` is public. If you want to secure this endpoint, consider adding authentication middleware (`auth:sanctum`) to ensure that only authorized users can generate variations for their images.
+
+- **Validation**: 
+   - Ensure that the image upload route includes validation to check file type and size.
+
+- **Real-Time Updates for Variations**: 
+   - If generating variations takes time, you might want to consider implementing a real-time progress indicator with Pusher or polling for the status of image generation jobs.
+
+
 
 ## Database Design
 The database consists of the following key tables:

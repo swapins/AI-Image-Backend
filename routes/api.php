@@ -10,6 +10,5 @@ Route::middleware(['auth:sanctum','addUserRole'])->get('/user', function (Reques
 });
 
 Route::post('/upload-image', [ImageController::class, 'upload'])->middleware('auth:sanctum');
-//Route::post('/generate-image', [ImageController::class, ''])->middleware('auth:sanctum');
 Route::get('/generate-variations/{imageId}', [ImageController::class, 'generateImageVariations']);
 Route::get('/user-images',[ImageController::class,'getUserImages']);
