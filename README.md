@@ -193,8 +193,7 @@ Ensure proper authentication is implemented for all routes, supports Sanctum, AP
 ## Database Design
 The database consists of the following key tables:
 - `users`: Stores user information.
-- `images`: Stores metadata for uploaded images.
-- `generated_images`: Stores metadata for generated image variations.
+- `images`: Stores metadata for uploaded images and generated images.
 
 ### Relationships:
 - A `user` has many `images`.
@@ -220,9 +219,6 @@ php artisan test
 - **Real-Time Updates**: Implemented via Pusher, users can see live updates of their image generation progress.
 - **Role-Based Access Control (RBAC)**: Admin users can view all uploaded images, while regular users can only view their own.
 
-You can include a **Developer Information** section at the end of the `README.md` file to provide contact details, acknowledgments, or any other relevant information about the developer. Here's an example you can use:
-
----
 
 ## Developer Information
 
