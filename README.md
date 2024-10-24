@@ -89,6 +89,17 @@ Run database migrations to create the necessary tables:
 php artisan migrate
 ```
 
+### 5. Run DB Seed
+Run database seeds to create an Admin user and normal user:
+```bash
+php artisan db:seed
+```
+This create two accounts 
+   1. User Email : admin@example.com Password: 'password'
+   2. User Email : user@example.com Password: 'password'
+this can be used to experience the demo.
+
+
 ### 6. Install Docker (Optional)
 If you prefer to use Docker for containerization, ensure you have Docker installed and set up by following [Docker's official installation guide](https://docs.docker.com/get-docker/).
 
