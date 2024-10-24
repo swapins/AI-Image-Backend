@@ -133,9 +133,9 @@ This key will be used to interact with the OpenAI API for generating image varia
 Pusher is used to implement real-time updates, allowing users to see the progress of their image generation in real time. Add the Pusher credentials in the `.env` file:
 
 ```bash
-PUSHER_APP_ID=1884805
-PUSHER_APP_KEY=15483f78c495d25ba602
-PUSHER_APP_SECRET=7d31f40d802a6a0acae0
+PUSHER_APP_ID=1xxxxxx
+PUSHER_APP_KEY=12xxxxxxxx
+PUSHER_APP_SECRET=7dxccc1111
 PUSHER_APP_CLUSTER=ap2
 PUSHER_APP_DEBUG=true
 ```
