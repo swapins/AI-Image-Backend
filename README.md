@@ -1,7 +1,3 @@
-Here’s a full version of the `README.md`, including detailed instructions for setting up the Laravel backend, configuring the mail client, OpenAI API, Pusher credentials, and handling queues with `php artisan queue:work`:
-
----
-
 # Laravel Backend for SaaS Image Generation Application
 
 This repository contains the backend API built with Laravel for a SaaS application that allows users to upload images and generate variations using a generative AI API. The application provides user authentication, image uploads, image generation, and API endpoints for communication with the frontend built in Next.js.
@@ -26,7 +22,7 @@ This repository contains the backend API built with Laravel for a SaaS applicati
 ## Features
 - **User Authentication**: User registration, login, and access control using Laravel's built-in authentication.
 - **Image Upload**: Upload PNG or JPG images to cloud storage (e.g., AWS S3).
-- **Generative AI API Integration**: Generate image variations using a generative AI service.
+- **Generative AI API Integration**: Generate image variations using a generative AI service OpenAI. 
 - **User Dashboard API**: Provide endpoints for users to view, manage, and download uploaded and generated images.
 - **Role-Based Access Control (RBAC)**: Admin users can view all images, while regular users can view only their own.
 - **Job Queues**: Handle image generation in the background using Laravel Queues for efficient processing.
@@ -36,7 +32,7 @@ This repository contains the backend API built with Laravel for a SaaS applicati
 - PHP 8.0 or higher
 - Composer
 - MySQL
-- Laravel 10.x
+- Laravel 11.x
 - AWS S3 (or any other cloud storage for images)
 - Redis (for queues)
 - Docker (optional, for containerization)
@@ -47,8 +43,8 @@ This repository contains the backend API built with Laravel for a SaaS applicati
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/laravel-saas-backend.git
-cd laravel-saas-backend
+git https://github.com/swapins/AI-Image-Backend.git
+cd AI-Image-Backend
 ```
 
 ### 2. Install Dependencies
@@ -117,10 +113,10 @@ Make sure you replace the `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, and `MAIL_P
 To integrate the OpenAI API for generating image variations, you need to provide your OpenAI API key in the `.env` file:
 
 ```bash
-OPENAI_API_KEY=sk-proj-XILRjLYo48_S
+OPENAI_API_KEY=your_openAI_key
 ```
 
-This key will be used to interact with the OpenAI API for generating image variations from uploaded images.
+This key will be used to interact with the OpenAI API for generating image variations from uploaded images. due to restrictions the demo will proceed with a mocked version if Daily limits of OpenAI key is not met.
 
 ### Pusher Configuration
 Pusher is used to implement real-time updates, allowing users to see the progress of their image generation in real time. Add the Pusher credentials in the `.env` file:
@@ -158,6 +154,13 @@ To handle image generation in the background, you need to configure a queue syst
 
    This command will start processing jobs in the background, ensuring that the image generation process does not block other application functionality.
 
+4. **Can also use database as Laravel Queue Connection**:
+    In your `.env` file, set the queue driver to `database`:
+    ```bash
+    QUEUE_CONNECTION=database
+    ```
+
+
 ## Running the Application
 
 ### 1. Run Laravel Server Locally
@@ -185,7 +188,7 @@ The following API endpoints are available for interacting with the Laravel backe
 - **GET /api/images**: Get a list of uploaded and generated images.
 - **GET /api/images/{id}/download**: Download a generated image by ID.
 
-Ensure proper authentication is implemented for all routes.
+Ensure proper authentication is implemented for all routes, supports Sanctum, API key, And No Auth for Demo.
 
 ## Database Design
 The database consists of the following key tables:
@@ -217,5 +220,19 @@ php artisan test
 - **Real-Time Updates**: Implemented via Pusher, users can see live updates of their image generation progress.
 - **Role-Based Access Control (RBAC)**: Admin users can view all uploaded images, while regular users can only view their own.
 
+You can include a **Developer Information** section at the end of the `README.md` file to provide contact details, acknowledgments, or any other relevant information about the developer. Here's an example you can use:
+
 ---
 
+## Developer Information
+
+This project was developed by Swapin Vidya.
+
+### Contact Information:
+- **Email**: swapin@laravelone.in
+- **GitHub**: [https://github.com/swapins](https://github.com/swapins)
+- **LinkedIn**: [www.linkedin.com/in/swapin-vidya](www.linkedin.com/in/swapin-vidya)
+- **Portfolio**: [https://sevati.in/swapin](https://sevati.in/swapin)
+
+### Acknowledgments
+Special thanks to all open-source libraries and tools used in this project:
